@@ -9,7 +9,8 @@ import torch.nn.functional as F
 import torchvision
 
 # import your model class
-# import ...
+from model_file import RoadModel
+
 
 # Put your transform function here, we will use it for our dataloader
 def get_transform(): 
@@ -25,11 +26,13 @@ class ModelLoader():
     def __init__(self, model_file='put_your_model_file_name_here'):
         # You should 
         #       1. create the model object
+        model = RoadModel()
         #       2. load your state_dict
+        model.load_state_dict(torch.load(model_file))
         #       3. call cuda()
+        device = torch.device("cuda")
         # self.model = ...
-        # 
-        pass
+        self.model = model
 
     def get_bounding_boxes(self, samples):
         # samples is a cuda tensor with size [batch_size, 6, 3, 256, 306]
