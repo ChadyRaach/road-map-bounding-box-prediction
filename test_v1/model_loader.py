@@ -23,7 +23,11 @@ from model_file import RoadModel
 
 
 # Put your transform function here, we will use it for our dataloader
-def get_transform(): 
+# For bounding boxes task
+def get_transform_task1(): 
+    return torchvision.transforms.ToTensor()
+# For road map task
+def get_transform_task2(): 
     return torchvision.transforms.ToTensor()
 
 class ModelLoader():
@@ -42,7 +46,7 @@ class ModelLoader():
         #       3. call cuda()
         device = torch.device("cuda")
         # self.model = ...
-        self.model = model
+        self.model = model.to(device)
 
     def get_bounding_boxes(self, samples):
         # samples is a cuda tensor with size [batch_size, 6, 3, 256, 306]
