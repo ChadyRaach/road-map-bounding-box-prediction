@@ -3,10 +3,20 @@ You need to implement all four functions in this file and also put your team inf
 Then you should submit the python file with your model class, the state_dict, and this file
 """
 
+import os
+import random
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt 
+matplotlib.rcParams['figure.figsize'] = [5, 5] 
+matplotlib.rcParams['figure.dpi'] = 200
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchvision
+from data_helper import UnlabeledDataset, LabeledDataset
+from google.colab.patches import cv2_imshow
+from helper import collate_fn, draw_box
 
 # import your model class
 from model_file import RoadModel
