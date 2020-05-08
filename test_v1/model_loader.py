@@ -59,4 +59,4 @@ class ModelLoader():
         # samples is a cuda tensor with size [batch_size, 6, 3, 256, 306]
         # You need to return a cuda tensor with size [batch_size, 800, 800] 
         
-        return self.model(samples.permute(1,0,2,3,4))
+        return self.model(samples.permute(1,0,2,3,4)) > 0.5
