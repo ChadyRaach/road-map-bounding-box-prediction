@@ -26,7 +26,7 @@ def get_transform_task2():
 class ModelLoader():
     # Fill the information for your team
     team_name = 'team_name'
-    team_number = 1
+    team_number = 58
     round_number = 3
     team_member = ['Henry Steinitz', 'Chady Raach', 'Jatin Khilnani']
     contact_email = 'jk6373@nyu.edu'
@@ -50,13 +50,17 @@ class ModelLoader():
         # samples is a cuda tensor with size [batch_size, 6, 3, 256, 306]
         # You need to return a tuple with size 'batch_size' and each element is a cuda tensor [N, 2, 4]
         # where N is the number of object
+        
+        # return (torch.rand(1, 15, 2, 4) * 80) - 40
+
         self.bb_model.eval()
-        return (torch.rand(1, 15, 2, 4) * 80) - 40
+        return self.bb_model(samples)[:,:,:8].reshape([-1,1,2,4])
 
     def get_binary_road_map(self, samples):
         # samples is a cuda tensor with size [batch_size, 6, 3, 256, 306]
         # You need to return a cuda tensor with size [batch_size, 800, 800] 
         
         # return torch.rand(1, 800, 800) > 0.5
+        
         self.ri_model.eval()
         return self.ri_model(samples.permute(1,0,2,3,4)) > 0.5

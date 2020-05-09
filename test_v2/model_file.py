@@ -43,14 +43,29 @@ class RoadModel(nn.Module):
         x = F.relu(x)
         x = self.ups4(x)
         x = self.deconv4(x)
-        return F.sigmoid(x)
+        return torch.sigmoid(x)
     
 
 # Bounding Box Predictor
+MAX_OBJECTS = 1
+NUM_CLASSES = 9
+
 class BoundingBoxModel(nn.Module):
     def __init__(self):
         super().__init__()
+        self.image_model = torch.hub.load('pytorch/vision:v0.6.0', 'resnet18', 
+                                          pretrained=False)       
+        self.fc1 = nn.Linear(6000, 1000)
+        # self.certainty_fc2 = nn.Linear(1000, MAX_OBJECTS)
+        self.fc2 = nn.Linear(1000, MAX_OBJECTS * 8 + MAX_OBJECTS * NUM_CLASSES)
     
     
     def forward(self, x):
-        pass
+        features = []
+        for im in x:
+            features.append(self.image_model(im))
+        x = torch.cat(features, dim=1)
+        x = self.fc1(x)
+        x = F.relu(x)
+        x = self.fc2(x)
+        return x.reshape([-1, MAX_OBJECTS, NUM_CLASSES + 8])
