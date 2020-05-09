@@ -29,7 +29,7 @@ class ModelLoader():
     team_number = 1
     round_number = 3
     team_member = ['Henry Steinitz', 'Chady Raach', 'Jatin Khilnani']
-    contact_email = '@nyu.edu'
+    contact_email = 'jk6373@nyu.edu'
 
     def __init__(self, model_file='model_state_dict.pt'):
         # You should 

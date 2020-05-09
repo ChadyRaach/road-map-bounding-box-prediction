@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 
 # The full road model holds and image model (ResNet18), and applies that
 # image model to each of the 6 road images.
