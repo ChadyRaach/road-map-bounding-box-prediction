@@ -54,7 +54,7 @@ class ModelLoader():
         # return (torch.rand(1, 15, 2, 4) * 80) - 40
 
         self.bb_model.eval()
-        return self.bb_model(samples)[:,:,:8].reshape([-1,1,2,4])
+        return self.bb_model(samples.permute(1, 0, 2, 3, 4))[:,:,:8].reshape([-1,1,2,4])
 
     def get_binary_road_map(self, samples):
         # samples is a cuda tensor with size [batch_size, 6, 3, 256, 306]
