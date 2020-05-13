@@ -25,7 +25,7 @@ def get_transform_task2():
 
 class ModelLoader():
     # Fill the information for your team
-    team_name = 'team_name'
+    team_name = 'Mini-Batch'
     team_number = 58
     round_number = 3
     team_member = ['Henry Steinitz', 'Chady Raach', 'Jatin Khilnani']
